@@ -1,0 +1,46 @@
+Cervus canadensis	wapiti
+Cervus elaphus	red deer
+Aepyceros melampus	impala
+Nanger granti	gazelle
+Ovis canadensis	bighorn sheep
+Odocoileus virginianus	white-tailed deer
+Syncerus caffer	African buffalo
+Antilocapra americana	pronghorn
+Mustela erminea	short-tailed weasel
+Bison bison	American bison
+Procyon lotor	raccoon
+Procyon cancrivorus	crab-eating racoon
+Equus quagga	zebra
+Ursus maritimus	polar bear
+Ursus arctos	brown bear
+Ursus americanus	black bear
+Panthera leo	lion
+Panthera pardus	leopard
+Panthera tigris	tiger
+Papio spp.	baboon
+Pan troglodytes	chimpanzee
+Peromyscus maniculatus	deermouse
+Gorilla spp.	gorilla
+Canis latrans	coyote
+Canis lupus	wolf
+Castor canadensis	American beaver
+Microtus californicus	California vole
+Puma concolor	puma
+Mastomys natalensis	African soft-furred rat
+Hipposideros cervinus	bat
+Carollia perspicillata	bat
+Lasiurus borealis	bat
+Lasiurus blossevillii	bat
+Myotis lucifugus	bat
+Cynopterus brachyotis	bat
+Cynopterus luzoniensis	bat
+Pteropus vampyrus	bat
+Pteropus alecto	bat
+Pteropus conspicillatus	bat
+Pteropus hypomelanus	bat
+Pteropus neohibernicus	bat
+Pteropus pelewensis	bat
+Pteropus scapulatus	bat
+Pteropus tonganus	bat
+Bison bonasus	European bison
+Myotragus	cave goat

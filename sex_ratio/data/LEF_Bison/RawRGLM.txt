@@ -1,0 +1,868 @@
+install.packages("lme4")
+library(lme4)
+SexBias <- read.table("Desktop/SexBiasR.txt", header = TRUE, na.strings = ("NA"))
+> glmFull <- glm(sex ~ SiteType + Sampled_by + Date + Latitude + SampleCategory + ShotgunEndo + ShotgunClonality, data = SexBias, family = binomial)
+> summary(glmFull)
+
+Call:
+glm(formula = sex ~ SiteType + Sampled_by + Date + Latitude + 
+    SampleCategory + ShotgunEndo + ShotgunClonality, family = binomial, 
+    data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0523  -0.6088   0.5837   0.7514   1.5663  
+
+Coefficients:
+                                    Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                        5.752e+00  5.646e+00   1.019   0.3083  
+SiteTypeGravelPit                  1.913e+01  6.523e+03   0.003   0.9977  
+SiteTypeLacustrine                 2.058e+01  4.017e+03   0.005   0.9959  
+SiteTypeMarine                     5.213e+00  2.192e+00   2.378   0.0174 *
+SiteTypeMine                       2.062e+01  6.523e+03   0.003   0.9975  
+SiteTypePitfall                   -1.967e+01  4.601e+03  -0.004   0.9966  
+SiteTypeRiverine                   2.935e+00  1.186e+00   2.474   0.0133 *
+SiteTypeSwamp                      2.092e+01  6.523e+03   0.003   0.9974  
+Sampled_byAlan_Cooper             -4.534e-01  7.013e-01  -0.647   0.5179  
+Sampled_byBastien_Llamas           1.753e+01  6.523e+03   0.003   0.9979  
+Sampled_byCooper/Rabanus/Soubrier  1.683e+01  6.523e+03   0.003   0.9979  
+Sampled_byE._Hofman-Kami_ska      -1.578e+00  7.988e+03   0.000   0.9998  
+Sampled_byIan_Barnes              -1.938e+00  1.284e+00  -1.509   0.1313  
+Sampled_byJulien_Soubrier          1.853e+01  4.102e+03   0.005   0.9964  
+Date                              -2.103e-05  1.911e-05  -1.101   0.2711  
+Latitude                          -1.036e-01  8.386e-02  -1.236   0.2166  
+SampleCategoryCrania              -1.709e+00  1.635e+00  -1.045   0.2959  
+SampleCategoryLongbone             1.336e-01  1.009e+00   0.132   0.8946  
+SampleCategoryPetrosal            -1.768e+01  6.523e+03  -0.003   0.9978  
+ShotgunEndo                        9.297e-01  1.735e+00   0.536   0.5921  
+ShotgunClonality                   6.484e-01  3.208e+00   0.202   0.8398  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 123.107  on 103  degrees of freedom
+Residual deviance:  96.718  on  83  degrees of freedom
+  (86 observations deleted due to missingness)
+AIC: 138.72
+
+Number of Fisher Scoring iterations: 17
+
+> glmNoClonal <- glm(sex ~ SiteType + Sampled_by + Date + Latitude + SampleCategory + ShotgunEndo, data = SexBias, family = binomial)
+> glmNoEndo <- glm(sex ~ SiteType + Sampled_by + Date + Latitude + SampleCategory + ShotgunClonality, data = SexBias, family = binomial)
+> glmNoCategory <- glm(sex ~ SiteType + Sampled_by + Date + Latitude + ShotgunEndo + ShotgunClonality, data = SexBias, family = binomial)
+> glmNoLatitude <- glm(sex ~ SiteType + Sampled_by + Date + SampleCategory + ShotgunEndo + ShotgunClonality, data = SexBias, family = binomial)
+> glmNoDate <- glm(sex ~ SiteType + Sampled_by + Latitude + SampleCategory + ShotgunEndo + ShotgunClonality, data = SexBias, family = binomial)
+Warning message:
+glm.fit: fitted probabilities numerically 0 or 1 occurred 
+> glmNoSampler <- glm(sex ~ SiteType + Date + Latitude + SampleCategory + ShotgunEndo + ShotgunClonality, data = SexBias, family = binomial)
+> glmNoSiteType <- glm(sex ~ Sampled_by + Date + Latitude + SampleCategory + ShotgunEndo + ShotgunClonality, data = SexBias, family = binomial)
+> glmSiteType <- glm(sex ~ SiteType, data = SexBias, family = binomial)
+> glmSampler <- glm(sex ~ Sampled_by, data = SexBias, family = binomial)
+> glmDate <- glm(sex ~ Date, data = SexBias, family = binomial)
+> glmLatitude <- glm(sex ~ Latitude, data = SexBias, family = binomial)
+> glmSampleCategory <- glm(sex ~ SampleCategory, data = SexBias, family = binomial)
+> glmEndo <- glm(sex ~ ShotgunEndo, data = SexBias, family = binomial)
+> glmClonality <- glm(sex ~ ShotgunClonality, data = SexBias, family = binomial)
+summary(glmNoClonal)
+
+Call:
+glm(formula = sex ~ SiteType + Sampled_by + Date + Latitude + 
+    SampleCategory + ShotgunEndo, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0473  -0.5947   0.5897   0.7546   1.6049  
+
+Coefficients:
+                                    Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                        6.124e+00  5.375e+00   1.140   0.2545  
+SiteTypeGravelPit                  1.913e+01  6.523e+03   0.003   0.9977  
+SiteTypeLacustrine                 2.061e+01  4.002e+03   0.005   0.9959  
+SiteTypeMarine                     5.248e+00  2.189e+00   2.398   0.0165 *
+SiteTypeMine                       2.063e+01  6.523e+03   0.003   0.9975  
+SiteTypePitfall                   -1.972e+01  4.600e+03  -0.004   0.9966  
+SiteTypeRiverine                   2.948e+00  1.189e+00   2.479   0.0132 *
+SiteTypeSwamp                      2.091e+01  6.523e+03   0.003   0.9974  
+Sampled_byAlan_Cooper             -4.752e-01  6.942e-01  -0.685   0.4936  
+Sampled_byBastien_Llamas           1.752e+01  6.523e+03   0.003   0.9979  
+Sampled_byCooper/Rabanus/Soubrier  1.679e+01  6.523e+03   0.003   0.9979  
+Sampled_byE._Hofman-Kami_ska      -1.653e+00  7.988e+03   0.000   0.9998  
+Sampled_byIan_Barnes              -1.939e+00  1.285e+00  -1.509   0.1313  
+Sampled_byJulien_Soubrier          1.852e+01  4.098e+03   0.005   0.9964  
+Date                              -2.089e-05  1.907e-05  -1.096   0.2732  
+Latitude                          -1.080e-01  8.153e-02  -1.324   0.1854  
+SampleCategoryCrania              -1.780e+00  1.596e+00  -1.115   0.2649  
+SampleCategoryLongbone             6.565e-02  9.501e-01   0.069   0.9449  
+SampleCategoryPetrosal            -1.772e+01  6.523e+03  -0.003   0.9978  
+ShotgunEndo                        9.340e-01  1.739e+00   0.537   0.5911  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 123.11  on 103  degrees of freedom
+Residual deviance:  96.76  on  84  degrees of freedom
+  (86 observations deleted due to missingness)
+AIC: 136.76
+
+Number of Fisher Scoring iterations: 17
+
+> summary(glmNoEndo)
+
+Call:
+glm(formula = sex ~ SiteType + Sampled_by + Date + Latitude + 
+    SampleCategory + ShotgunClonality, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0231  -0.6339   0.5802   0.7404   1.6485  
+
+Coefficients:
+                                    Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                        5.277e+00  5.546e+00   0.952   0.3413  
+SiteTypeGravelPit                  1.888e+01  6.523e+03   0.003   0.9977  
+SiteTypeLacustrine                 2.035e+01  4.118e+03   0.005   0.9961  
+SiteTypeMarine                     5.177e+00  2.180e+00   2.375   0.0176 *
+SiteTypeMine                       2.060e+01  6.523e+03   0.003   0.9975  
+SiteTypePitfall                   -1.946e+01  4.612e+03  -0.004   0.9966  
+SiteTypeRiverine                   2.871e+00  1.180e+00   2.434   0.0149 *
+SiteTypeSwamp                      2.086e+01  6.523e+03   0.003   0.9974  
+Sampled_byAlan_Cooper             -3.142e-01  6.475e-01  -0.485   0.6275  
+Sampled_byBastien_Llamas           1.792e+01  6.523e+03   0.003   0.9978  
+Sampled_byCooper/Rabanus/Soubrier  1.723e+01  6.523e+03   0.003   0.9979  
+Sampled_byE._Hofman-Kami_ska      -1.296e+00  7.987e+03   0.000   0.9999  
+Sampled_byIan_Barnes              -1.866e+00  1.269e+00  -1.470   0.1416  
+Sampled_byJulien_Soubrier          1.856e+01  4.117e+03   0.005   0.9964  
+Date                              -2.275e-05  1.889e-05  -1.204   0.2284  
+Latitude                          -9.216e-02  8.077e-02  -1.141   0.2539  
+SampleCategoryCrania              -1.867e+00  1.612e+00  -1.158   0.2468  
+SampleCategoryLongbone             1.125e-01  1.007e+00   0.112   0.9110  
+SampleCategoryPetrosal            -1.772e+01  6.523e+03  -0.003   0.9978  
+ShotgunClonality                   6.504e-01  3.156e+00   0.206   0.8367  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 123.107  on 103  degrees of freedom
+Residual deviance:  97.008  on  84  degrees of freedom
+  (86 observations deleted due to missingness)
+AIC: 137.01
+
+Number of Fisher Scoring iterations: 17
+
+> summary(glmNoCategory)
+
+Call:
+glm(formula = sex ~ SiteType + Sampled_by + Date + Latitude + 
+    ShotgunEndo + ShotgunClonality, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0625  -0.4228   0.6189   0.7661   1.5668  
+
+Coefficients:
+                                    Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                        7.658e+00  5.187e+00   1.476   0.1399  
+SiteTypeGravelPit                  1.819e+01  3.956e+03   0.005   0.9963  
+SiteTypeLacustrine                 1.985e+01  2.332e+03   0.009   0.9932  
+SiteTypeMarine                     4.140e+00  1.773e+00   2.334   0.0196 *
+SiteTypeMine                       1.915e+01  3.956e+03   0.005   0.9961  
+SiteTypePitfall                   -1.895e+01  2.786e+03  -0.007   0.9946  
+SiteTypeRiverine                   2.857e+00  1.190e+00   2.400   0.0164 *
+SiteTypeSwamp                      1.793e+01  3.956e+03   0.005   0.9964  
+Sampled_byAlan_Cooper             -7.999e-01  6.499e-01  -1.231   0.2184  
+Sampled_byBastien_Llamas          -3.019e-01  1.320e+00  -0.229   0.8192  
+Sampled_byCooper/Rabanus/Soubrier -7.014e-01  1.098e+00  -0.639   0.5230  
+Sampled_byE._Hofman-Kami_ska      -1.979e+00  4.845e+03   0.000   0.9997  
+Sampled_byIan_Barnes               5.622e-02  7.783e-01   0.072   0.9424  
+Sampled_byJim_Burns               -1.128e+00  2.034e+00  -0.555   0.5791  
+Sampled_byJulien_Soubrier         -5.707e-01  1.304e+00  -0.438   0.6617  
+Date                              -2.048e-05  1.711e-05  -1.197   0.2314  
+Latitude                          -1.299e-01  8.148e-02  -1.594   0.1109  
+ShotgunEndo                        1.095e+00  1.469e+00   0.746   0.4559  
+ShotgunClonality                   1.912e-01  2.216e+00   0.086   0.9312  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 142.43  on 121  degrees of freedom
+Residual deviance: 122.08  on 103  degrees of freedom
+  (68 observations deleted due to missingness)
+AIC: 160.08
+
+Number of Fisher Scoring iterations: 16
+
+> summary(glmNoLatitude)
+
+Call:
+glm(formula = sex ~ SiteType + Sampled_by + Date + SampleCategory + 
+    ShotgunEndo + ShotgunClonality, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0257  -0.6511   0.6225   0.7453   1.6498  
+
+Coefficients:
+                                    Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                       -9.856e-01  1.498e+00  -0.658   0.5106  
+SiteTypeGravelPit                  1.934e+01  6.523e+03   0.003   0.9976  
+SiteTypeLacustrine                 1.979e+01  4.491e+03   0.004   0.9965  
+SiteTypeMarine                     4.123e+00  1.940e+00   2.126   0.0335 *
+SiteTypeMine                       2.003e+01  6.523e+03   0.003   0.9975  
+SiteTypePitfall                   -1.809e+01  4.611e+03  -0.004   0.9969  
+SiteTypeRiverine                   2.317e+00  1.006e+00   2.302   0.0213 *
+SiteTypeSwamp                      2.100e+01  6.523e+03   0.003   0.9974  
+Sampled_byAlan_Cooper             -1.571e-01  6.434e-01  -0.244   0.8070  
+Sampled_byBastien_Llamas           1.794e+01  6.523e+03   0.003   0.9978  
+Sampled_byCooper/Rabanus/Soubrier  1.738e+01  6.523e+03   0.003   0.9979  
+Sampled_byE._Hofman-Kami_ska      -2.239e-02  7.988e+03   0.000   1.0000  
+Sampled_byIan_Barnes              -2.151e+00  1.263e+00  -1.704   0.0884 .
+Sampled_byJulien_Soubrier          1.844e+01  4.143e+03   0.004   0.9964  
+Date                              -1.851e-05  1.892e-05  -0.979   0.3277  
+SampleCategoryCrania              -1.459e+00  1.621e+00  -0.900   0.3680  
+SampleCategoryLongbone             5.019e-01  9.677e-01   0.519   0.6041  
+SampleCategoryPetrosal            -1.735e+01  6.523e+03  -0.003   0.9979  
+ShotgunEndo                        3.705e-01  1.682e+00   0.220   0.8257  
+ShotgunClonality                   1.580e+00  3.090e+00   0.512   0.6090  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 123.107  on 103  degrees of freedom
+Residual deviance:  98.327  on  84  degrees of freedom
+  (86 observations deleted due to missingness)
+AIC: 138.33
+
+Number of Fisher Scoring iterations: 17
+
+> summary(glmNoDate)
+
+Call:
+glm(formula = sex ~ SiteType + Sampled_by + Latitude + SampleCategory + 
+    ShotgunEndo + ShotgunClonality, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0227  -0.6877   0.6105   0.7792   1.5952  
+
+Coefficients:
+                                    Estimate Std. Error z value Pr(>|z|)  
+(Intercept)                          5.72498    5.67037   1.010   0.3127  
+SiteTypeGravelPit                   19.34774 6522.63869   0.003   0.9976  
+SiteTypeLacustrine                  19.15767 2680.87770   0.007   0.9943  
+SiteTypeMarine                       4.15154    2.00193   2.074   0.0381 *
+SiteTypeMine                        20.15115 6522.63876   0.003   0.9975  
+SiteTypePitfall                     -1.77684    2.06338  -0.861   0.3892  
+SiteTypeRiverine                     2.54941    1.12082   2.275   0.0229 *
+SiteTypeSwamp                       19.45433 3036.64581   0.006   0.9949  
+Sampled_byAlan_Cooper               -0.65955    0.66798  -0.987   0.3235  
+Sampled_byBastien_Llamas            -0.27840    1.91123  -0.146   0.8842  
+Sampled_byCooper/Rabanus/Soubrier   -1.12026    1.35170  -0.829   0.4072  
+Sampled_byE._Hofman-Kami_ska        16.77168 2120.12396   0.008   0.9937  
+Sampled_byIan_Barnes                -1.66524    1.00788  -1.652   0.0985 .
+Sampled_byJulien_Soubrier           18.43431 4155.41876   0.004   0.9965  
+Latitude                            -0.10901    0.08453  -1.290   0.1972  
+SampleCategoryCrania                -1.45204    1.60123  -0.907   0.3645  
+SampleCategoryLongbone               0.21251    1.01981   0.208   0.8349  
+SampleCategoryPetrosal               0.05256    1.84267   0.029   0.9772  
+ShotgunEndo                          1.31731    1.59628   0.825   0.4092  
+ShotgunClonality                     0.06916    3.02721   0.023   0.9818  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 130.17  on 111  degrees of freedom
+Residual deviance: 107.24  on  92  degrees of freedom
+  (78 observations deleted due to missingness)
+AIC: 147.24
+
+Number of Fisher Scoring iterations: 17
+
+> summary(glmNoSampler)
+
+Call:
+glm(formula = sex ~ SiteType + Date + Latitude + SampleCategory + 
+    ShotgunEndo + ShotgunClonality, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0151  -0.6842   0.6016   0.8023   1.6674  
+
+Coefficients:
+                         Estimate Std. Error z value Pr(>|z|)   
+(Intercept)             5.864e+00  4.889e+00   1.199   0.2304   
+SiteTypeGravelPit       1.784e+01  3.956e+03   0.005   0.9964   
+SiteTypeLacustrine      1.959e+01  2.392e+03   0.008   0.9935   
+SiteTypeMarine          3.944e+00  1.934e+00   2.039   0.0415 * 
+SiteTypeMine            1.952e+01  3.956e+03   0.005   0.9961   
+SiteTypePitfall        -1.887e+01  2.795e+03  -0.007   0.9946   
+SiteTypeRiverine        3.086e+00  1.174e+00   2.628   0.0086 **
+SiteTypeSwamp           1.847e+01  2.171e+03   0.009   0.9932   
+Date                   -2.843e-05  1.771e-05  -1.605   0.1084   
+Latitude               -1.030e-01  7.344e-02  -1.403   0.1606   
+SampleCategoryCrania   -1.225e+00  1.418e+00  -0.864   0.3877   
+SampleCategoryLongbone -9.725e-02  9.752e-01  -0.100   0.9206   
+SampleCategoryPetrosal -3.742e-01  1.284e+00  -0.291   0.7708   
+ShotgunEndo             5.356e-01  1.542e+00   0.347   0.7283   
+ShotgunClonality        1.008e+00  3.225e+00   0.313   0.7545   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 123.11  on 103  degrees of freedom
+Residual deviance: 103.06  on  89  degrees of freedom
+  (86 observations deleted due to missingness)
+AIC: 133.06
+
+Number of Fisher Scoring iterations: 16
+
+> summary(glmNoSiteType)
+
+Call:
+glm(formula = sex ~ Sampled_by + Date + Latitude + SampleCategory + 
+    ShotgunEndo + ShotgunClonality, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.2140  -1.1240   0.7181   0.8062   1.1746  
+
+Coefficients:
+                                    Estimate Std. Error z value Pr(>|z|)
+(Intercept)                       -4.465e-02  2.657e+00  -0.017    0.987
+Sampled_byAlan_Cooper             -2.013e-01  5.657e-01  -0.356    0.722
+Sampled_byBastien_Llamas           1.673e+01  2.400e+03   0.007    0.994
+Sampled_byCooper/Rabanus/Soubrier  1.543e+01  2.400e+03   0.006    0.995
+Sampled_byE._Hofman-Kami_ska       3.507e-02  1.055e+00   0.033    0.973
+Sampled_byIan_Barnes              -1.116e+00  8.346e-01  -1.337    0.181
+Sampled_byJulien_Soubrier          1.524e+01  1.382e+03   0.011    0.991
+Date                              -2.890e-06  1.515e-05  -0.191    0.849
+Latitude                           9.033e-03  3.969e-02   0.228    0.820
+SampleCategoryCrania               9.613e-01  9.818e-01   0.979    0.328
+SampleCategoryLongbone             6.157e-01  7.538e-01   0.817    0.414
+SampleCategoryPetrosal            -1.486e+01  2.400e+03  -0.006    0.995
+ShotgunEndo                        2.360e-01  1.289e+00   0.183    0.855
+ShotgunClonality                  -5.096e-01  2.295e+00  -0.222    0.824
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 155.11  on 135  degrees of freedom
+Residual deviance: 146.45  on 122  degrees of freedom
+  (54 observations deleted due to missingness)
+AIC: 174.45
+
+Number of Fisher Scoring iterations: 15
+
+> summary(glmSiteType)
+
+Call:
+glm(formula = sex ~ SiteType, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.9728  -0.9697   0.7715   0.7715   1.4823  
+
+Coefficients:
+                     Estimate Std. Error z value Pr(>|z|)  
+(Intercept)        -1.580e-17  5.774e-01   0.000   1.0000  
+SiteTypeGravelPit   1.757e+01  3.956e+03   0.004   0.9965  
+SiteTypeLacustrine  1.757e+01  1.978e+03   0.009   0.9929  
+SiteTypeMarine      1.792e+00  1.225e+00   1.463   0.1435  
+SiteTypeMine        1.757e+01  3.956e+03   0.004   0.9965  
+SiteTypePitfall    -6.931e-01  1.354e+00  -0.512   0.6087  
+SiteTypeRiverine    1.059e+00  6.206e-01   1.707   0.0878 .
+SiteTypeSwamp       1.757e+01  2.284e+03   0.008   0.9939  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 152.69  on 131  degrees of freedom
+Residual deviance: 141.41  on 124  degrees of freedom
+  (58 observations deleted due to missingness)
+AIC: 157.41
+
+Number of Fisher Scoring iterations: 16
+
+> summary(glmSampler)
+
+Call:
+glm(formula = sex ~ Sampled_by, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.9348  -1.1774   0.7393   0.7679   1.1774  
+
+Coefficients:
+                                  Estimate Std. Error z value Pr(>|z|)   
+(Intercept)                        1.07044    0.33452   3.200  0.00137 **
+Sampled_byAlan_Cooper             -0.23419    0.47134  -0.497  0.61928   
+Sampled_byBastien_Llamas           0.63431    0.83834   0.757  0.44928   
+Sampled_byCooper/Rabanus/Soubrier  0.02817    0.74589   0.038  0.96987   
+Sampled_byE._Hofman-Kami_ska       0.08701    0.48102   0.181  0.85646   
+Sampled_byIan_Barnes               0.02817    0.61528   0.046  0.96348   
+Sampled_byJim_Burns               -1.07044    1.05447  -1.015  0.31004   
+Sampled_byJulien_Soubrier          0.31585    1.16701   0.271  0.78666   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 216.92  on 189  degrees of freedom
+Residual deviance: 214.41  on 182  degrees of freedom
+AIC: 230.41
+
+Number of Fisher Scoring iterations: 4
+
+> summary(glmDate)
+
+Call:
+glm(formula = sex ~ Date, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.6888  -1.6014   0.7544   0.7757   0.8048  
+
+Coefficients:
+              Estimate Std. Error z value Pr(>|z|)    
+(Intercept)  1.153e+00  3.145e-01   3.666 0.000246 ***
+Date        -2.941e-06  9.355e-06  -0.314 0.753216    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 178.2  on 156  degrees of freedom
+Residual deviance: 178.1  on 155  degrees of freedom
+  (33 observations deleted due to missingness)
+AIC: 182.1
+
+Number of Fisher Scoring iterations: 4
+
+> summary(glmLatitude)
+
+Call:
+glm(formula = sex ~ Latitude, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.6489  -1.6435   0.7717   0.7731   0.7751  
+
+Coefficients:
+             Estimate Std. Error z value Pr(>|z|)
+(Intercept) 1.0327042  1.1823840   0.873    0.382
+Latitude    0.0003983  0.0192428   0.021    0.983
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 216.92  on 189  degrees of freedom
+Residual deviance: 216.92  on 188  degrees of freedom
+AIC: 220.92
+
+Number of Fisher Scoring iterations: 4
+
+> summary(glmCategory)
+Error in summary(glmCategory) : 
+  error in evaluating the argument 'object' in selecting a method for function 'summary': Error: object 'glmCategory' not found
+> summary(glmSampleCategory)
+
+Call:
+glm(formula = sex ~ SampleCategory, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.8465  -1.3537   0.7244   0.8178   1.0108  
+
+Coefficients:
+                       Estimate Std. Error z value Pr(>|z|)
+(Intercept)              0.4055     0.6455   0.628    0.530
+SampleCategoryCrania     1.0986     0.7876   1.395    0.163
+SampleCategoryLongbone   0.5182     0.6844   0.757    0.449
+SampleCategoryOther     15.1606   840.2744   0.018    0.986
+SampleCategoryPetrosal   0.7985     0.7958   1.003    0.316
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 190.52  on 166  degrees of freedom
+Residual deviance: 186.25  on 162  degrees of freedom
+  (23 observations deleted due to missingness)
+AIC: 196.25
+
+Number of Fisher Scoring iterations: 14
+
+> summary(glmEndo)
+
+Call:
+glm(formula = sex ~ ShotgunEndo, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.6754  -1.6324   0.7672   0.7797   0.7830  
+
+Coefficients:
+            Estimate Std. Error z value Pr(>|z|)    
+(Intercept)   1.0249     0.2506    4.09 4.31e-05 ***
+ShotgunEndo   0.1330     0.7847    0.17    0.865    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 216.92  on 189  degrees of freedom
+Residual deviance: 216.89  on 188  degrees of freedom
+AIC: 220.89
+
+Number of Fisher Scoring iterations: 4
+
+> summary(glmClonality)
+
+Call:
+glm(formula = sex ~ ShotgunClonality, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.6522  -1.6073   0.7691   0.7701   0.8368  
+
+Coefficients:
+                 Estimate Std. Error z value Pr(>|z|)    
+(Intercept)        1.0702     0.1839   5.819 5.91e-09 ***
+ShotgunClonality  -0.3023     1.7874  -0.169    0.866    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 216.92  on 189  degrees of freedom
+Residual deviance: 216.89  on 188  degrees of freedom
+AIC: 220.89
+
+Number of Fisher Scoring iterations: 4
+
+glmNoSamplerClonal <- glm(sex ~ SiteType + Date + Latitude + SampleCategory + ShotgunEndo, data = SexBias, family = binomial)
+> glmNoSamplerEndo <- glm(sex ~ SiteType + Date + Latitude + SampleCategory + ShotgunClonality, data = SexBias, family = binomial)
+> glmNoSamplerEndoClonal <- glm(sex ~ SiteType + Date + Latitude + SampleCategory, data = SexBias, family = binomial)
+> glmNoSamplerLatEndoClonal <- glm(sex ~ SiteType + Date + SampleCategory, data = SexBias, family = binomial)
+> summary(glmNoSamplerClonal)
+
+Call:
+glm(formula = sex ~ SiteType + Date + Latitude + SampleCategory + 
+    ShotgunEndo, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0269  -0.6844   0.6050   0.8081   1.7332  
+
+Coefficients:
+                         Estimate Std. Error z value Pr(>|z|)   
+(Intercept)             6.280e+00  4.711e+00   1.333  0.18253   
+SiteTypeGravelPit       1.783e+01  3.956e+03   0.005  0.99640   
+SiteTypeLacustrine      1.959e+01  2.384e+03   0.008  0.99345   
+SiteTypeMarine          4.005e+00  1.923e+00   2.083  0.03724 * 
+SiteTypeMine            1.949e+01  3.956e+03   0.005  0.99607   
+SiteTypePitfall        -1.892e+01  2.795e+03  -0.007  0.99460   
+SiteTypeRiverine        3.099e+00  1.180e+00   2.627  0.00861 **
+SiteTypeSwamp           1.844e+01  2.159e+03   0.009  0.99318   
+Date                   -2.810e-05  1.766e-05  -1.592  0.11145   
+Latitude               -1.076e-01  7.215e-02  -1.491  0.13594   
+SampleCategoryCrania   -1.336e+00  1.373e+00  -0.973  0.33072   
+SampleCategoryLongbone -1.868e-01  9.292e-01  -0.201  0.84063   
+SampleCategoryPetrosal -4.279e-01  1.262e+00  -0.339  0.73457   
+ShotgunEndo             4.845e-01  1.530e+00   0.317  0.75142   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 123.11  on 103  degrees of freedom
+Residual deviance: 103.16  on  90  degrees of freedom
+  (86 observations deleted due to missingness)
+AIC: 131.16
+
+Number of Fisher Scoring iterations: 16
+
+> summary(glmNoSamplerEndo)
+
+Call:
+glm(formula = sex ~ SiteType + Date + Latitude + SampleCategory + 
+    ShotgunClonality, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0537  -0.6813   0.6078   0.7959   1.6704  
+
+Coefficients:
+                         Estimate Std. Error z value Pr(>|z|)   
+(Intercept)             5.834e+00  4.899e+00   1.191  0.23373   
+SiteTypeGravelPit       1.771e+01  3.956e+03   0.004  0.99643   
+SiteTypeLacustrine      1.950e+01  2.413e+03   0.008  0.99355   
+SiteTypeMarine          3.965e+00  1.936e+00   2.048  0.04057 * 
+SiteTypeMine            1.950e+01  3.956e+03   0.005  0.99607   
+SiteTypePitfall        -1.877e+01  2.797e+03  -0.007  0.99465   
+SiteTypeRiverine        3.053e+00  1.175e+00   2.600  0.00934 **
+SiteTypeSwamp           1.842e+01  2.183e+03   0.008  0.99327   
+Date                   -2.959e-05  1.742e-05  -1.699  0.08935 . 
+Latitude               -9.966e-02  7.295e-02  -1.366  0.17190   
+SampleCategoryCrania   -1.299e+00  1.406e+00  -0.924  0.35553   
+SampleCategoryLongbone -1.013e-01  9.757e-01  -0.104  0.91730   
+SampleCategoryPetrosal -1.981e-01  1.176e+00  -0.168  0.86621   
+ShotgunClonality        8.838e-01  3.147e+00   0.281  0.77884   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 123.11  on 103  degrees of freedom
+Residual deviance: 103.18  on  90  degrees of freedom
+  (86 observations deleted due to missingness)
+AIC: 131.18
+
+Number of Fisher Scoring iterations: 16
+
+> summary(glmNoSamplerClonal)
+
+Call:
+glm(formula = sex ~ SiteType + Date + Latitude + SampleCategory + 
+    ShotgunEndo, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0269  -0.6844   0.6050   0.8081   1.7332  
+
+Coefficients:
+                         Estimate Std. Error z value Pr(>|z|)   
+(Intercept)             6.280e+00  4.711e+00   1.333  0.18253   
+SiteTypeGravelPit       1.783e+01  3.956e+03   0.005  0.99640   
+SiteTypeLacustrine      1.959e+01  2.384e+03   0.008  0.99345   
+SiteTypeMarine          4.005e+00  1.923e+00   2.083  0.03724 * 
+SiteTypeMine            1.949e+01  3.956e+03   0.005  0.99607   
+SiteTypePitfall        -1.892e+01  2.795e+03  -0.007  0.99460   
+SiteTypeRiverine        3.099e+00  1.180e+00   2.627  0.00861 **
+SiteTypeSwamp           1.844e+01  2.159e+03   0.009  0.99318   
+Date                   -2.810e-05  1.766e-05  -1.592  0.11145   
+Latitude               -1.076e-01  7.215e-02  -1.491  0.13594   
+SampleCategoryCrania   -1.336e+00  1.373e+00  -0.973  0.33072   
+SampleCategoryLongbone -1.868e-01  9.292e-01  -0.201  0.84063   
+SampleCategoryPetrosal -4.279e-01  1.262e+00  -0.339  0.73457   
+ShotgunEndo             4.845e-01  1.530e+00   0.317  0.75142   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 123.11  on 103  degrees of freedom
+Residual deviance: 103.16  on  90  degrees of freedom
+  (86 observations deleted due to missingness)
+AIC: 131.16
+
+Number of Fisher Scoring iterations: 16
+
+> summary(glmNoSamplerEndoClonal)
+
+Call:
+glm(formula = sex ~ SiteType + Date + Latitude + SampleCategory, 
+    family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0655  -0.6810   0.6158   0.7963   1.7288  
+
+Coefficients:
+                         Estimate Std. Error z value Pr(>|z|)   
+(Intercept)             6.220e+00  4.710e+00   1.321  0.18664   
+SiteTypeGravelPit       1.771e+01  3.956e+03   0.004  0.99643   
+SiteTypeLacustrine      1.951e+01  2.403e+03   0.008  0.99352   
+SiteTypeMarine          4.020e+00  1.925e+00   2.089  0.03674 * 
+SiteTypeMine            1.948e+01  3.956e+03   0.005  0.99607   
+SiteTypePitfall        -1.883e+01  2.797e+03  -0.007  0.99463   
+SiteTypeRiverine        3.069e+00  1.179e+00   2.603  0.00924 **
+SiteTypeSwamp           1.840e+01  2.171e+03   0.008  0.99324   
+Date                   -2.922e-05  1.733e-05  -1.686  0.09180 . 
+Latitude               -1.041e-01  7.139e-02  -1.458  0.14474   
+SampleCategoryCrania   -1.395e+00  1.362e+00  -1.024  0.30578   
+SampleCategoryLongbone -1.851e-01  9.267e-01  -0.200  0.84169   
+SampleCategoryPetrosal -2.642e-01  1.147e+00  -0.230  0.81780   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 123.11  on 103  degrees of freedom
+Residual deviance: 103.26  on  91  degrees of freedom
+  (86 observations deleted due to missingness)
+AIC: 129.26
+
+Number of Fisher Scoring iterations: 16
+
+> summary(glmNoSamplerLatEndoClonal)
+
+Call:
+glm(formula = sex ~ SiteType + Date + SampleCategory, family = binomial, 
+    data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.9287  -0.8263   0.6415   0.7625   1.5917  
+
+Coefficients:
+                         Estimate Std. Error z value Pr(>|z|)  
+(Intercept)            -4.146e-01  1.274e+00  -0.325   0.7448  
+SiteTypeGravelPit       1.819e+01  3.956e+03   0.005   0.9963  
+SiteTypeLacustrine      1.888e+01  2.672e+03   0.007   0.9944  
+SiteTypeMarine          2.566e+00  1.556e+00   1.649   0.0991 .
+SiteTypeMine            1.878e+01  3.956e+03   0.005   0.9962  
+SiteTypePitfall        -1.720e+01  2.797e+03  -0.006   0.9951  
+SiteTypeRiverine        2.360e+00  9.945e-01   2.373   0.0176 *
+SiteTypeSwamp           1.916e+01  2.284e+03   0.008   0.9933  
+Date                   -2.699e-05  1.701e-05  -1.587   0.1126  
+SampleCategoryCrania   -1.119e+00  1.345e+00  -0.832   0.4054  
+SampleCategoryLongbone  1.403e-01  8.925e-01   0.157   0.8751  
+SampleCategoryPetrosal  3.061e-01  1.070e+00   0.286   0.7748  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 123.11  on 103  degrees of freedom
+Residual deviance: 105.47  on  92  degrees of freedom
+  (86 observations deleted due to missingness)
+AIC: 129.47
+
+Number of Fisher Scoring iterations: 16
+
+> glmNoSamplerLatEndoClonal <- glm(sex ~ SiteType + Date, data = SexBias, family = binomial)
+> glmNoSamplerLatEndoClonal <- glm(sex ~ SiteType + Date + SampleCategory, data = SexBias, family = binomial)
+> glmNoSamplerLatEndoClonalCat <- glm(sex ~ SiteType + Date, data = SexBias, family = binomial)
+> summary(glmNoSamplerLatEndoClonalCat)
+
+Call:
+glm(formula = sex ~ SiteType + Date, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.8572  -0.7136   0.6722   0.7778   1.4892  
+
+Coefficients:
+                     Estimate Std. Error z value Pr(>|z|)  
+(Intercept)        -2.857e-01  7.558e-01  -0.378   0.7054  
+SiteTypeGravelPit   1.808e+01  3.956e+03   0.005   0.9964  
+SiteTypeLacustrine  1.850e+01  2.744e+03   0.007   0.9946  
+SiteTypeMarine      2.834e+00  1.394e+00   2.033   0.0421 *
+SiteTypeMine        1.856e+01  3.956e+03   0.005   0.9963  
+SiteTypePitfall    -1.722e+01  2.797e+03  -0.006   0.9951  
+SiteTypeRiverine    1.990e+00  8.496e-01   2.343   0.0191 *
+SiteTypeSwamp       1.789e+01  2.284e+03   0.008   0.9938  
+Date               -1.726e-05  1.475e-05  -1.170   0.2421  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 142.43  on 121  degrees of freedom
+Residual deviance: 126.24  on 113  degrees of freedom
+  (68 observations deleted due to missingness)
+AIC: 144.24
+
+Number of Fisher Scoring iterations: 16
+glmSiteTypeDateInt <- glm(sex ~ SiteType * Date, data = SexBias, family = binomial)
+> glmSiteTypeDateInt <- glm(sex ~ SiteType * Date * Latitude, data = SexBias, family = binomial)
+Warning message:
+glm.fit: fitted probabilities numerically 0 or 1 occurred 
+> glmSiteTypeDateInt <- glm(sex ~ SiteType * Date, data = SexBias, family = binomial)
+> glmSiteTypeDateLatInt <- glm(sex ~ SiteType * Date * Latitude, data = SexBias, family = binomial)
+Warning message:
+glm.fit: fitted probabilities numerically 0 or 1 occurred 
+> summary(glmSiteTypeDateInt)
+
+Call:
+glm(formula = sex ~ SiteType * Date, family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.7986  -0.7125   0.6976   0.7807   1.4965  
+
+Coefficients: (2 not defined because of singularities)
+                          Estimate Std. Error z value Pr(>|z|)
+(Intercept)             -2.676e-01  1.773e+00  -0.151    0.880
+SiteTypeGravelPit        1.808e+01  3.956e+03   0.005    0.996
+SiteTypeLacustrine       1.783e+01  5.132e+03   0.003    0.997
+SiteTypeMarine           2.501e+01  3.347e+01   0.747    0.455
+SiteTypeMine             1.860e+01  3.956e+03   0.005    0.996
+SiteTypePitfall         -1.730e+01  2.728e+05   0.000    1.000
+SiteTypeRiverine         1.859e+00  1.875e+00   0.992    0.321
+SiteTypeSwamp            1.783e+01  2.510e+04   0.001    0.999
+Date                    -1.866e-05  1.247e-04  -0.150    0.881
+SiteTypeGravelPit:Date          NA         NA      NA       NA
+SiteTypeLacustrine:Date  1.866e-05  1.218e-01   0.000    1.000
+SiteTypeMarine:Date     -3.967e-04  5.814e-04  -0.682    0.495
+SiteTypeMine:Date               NA         NA      NA       NA
+SiteTypePitfall:Date     1.866e-05  7.993e+01   0.000    1.000
+SiteTypeRiverine:Date    4.411e-06  1.256e-04   0.035    0.972
+SiteTypeSwamp:Date       1.866e-05  1.098e+01   0.000    1.000
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 142.43  on 121  degrees of freedom
+Residual deviance: 124.08  on 108  degrees of freedom
+  (68 observations deleted due to missingness)
+AIC: 152.08
+
+Number of Fisher Scoring iterations: 16
+
+> summary(glmSiteTypeDateLatInt)
+
+Call:
+glm(formula = sex ~ SiteType * Date * Latitude, family = binomial, 
+    data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.8265   0.0000   0.7020   0.7234   1.1092  
+
+Coefficients: (11 not defined because of singularities)
+                                   Estimate Std. Error z value Pr(>|z|)
+(Intercept)                      -2.448e+03  3.499e+05  -0.007    0.994
+SiteTypeGravelPit                 7.113e+01  1.956e+04   0.004    0.997
+SiteTypeLacustrine               -8.593e+02  1.077e+05  -0.008    0.994
+SiteTypeMarine                    1.352e+03  6.475e+05   0.002    0.998
+SiteTypeMine                      1.633e+03  1.719e+05   0.009    0.992
+SiteTypePitfall                   1.998e+02  1.223e+06   0.000    1.000
+SiteTypeRiverine                  2.441e+03  3.499e+05   0.007    0.994
+SiteTypeSwamp                     2.059e+03  3.374e+05   0.006    0.995
+Date                              1.668e-01  2.009e+01   0.008    0.993
+Latitude                          4.962e+01  7.029e+03   0.007    0.994
+SiteTypeGravelPit:Date                   NA         NA      NA       NA
+SiteTypeLacustrine:Date           7.345e-02  8.230e+00   0.009    0.993
+SiteTypeMarine:Date              -1.347e-01  2.602e+01  -0.005    0.996
+SiteTypeMine:Date                        NA         NA      NA       NA
+SiteTypePitfall:Date             -9.849e-03  3.582e+02   0.000    1.000
+SiteTypeRiverine:Date            -1.665e-01  2.009e+01  -0.008    0.993
+SiteTypeSwamp:Date               -1.663e-02  1.769e+02   0.000    1.000
+SiteTypeGravelPit:Latitude               NA         NA      NA       NA
+SiteTypeLacustrine:Latitude              NA         NA      NA       NA
+SiteTypeMarine:Latitude          -3.350e+01  1.038e+04  -0.003    0.997
+SiteTypeMine:Latitude                    NA         NA      NA       NA
+SiteTypePitfall:Latitude                 NA         NA      NA       NA
+SiteTypeRiverine:Latitude        -4.949e+01  7.029e+03  -0.007    0.994
+SiteTypeSwamp:Latitude           -4.027e+01  8.093e+03  -0.005    0.996
+Date:Latitude                    -3.497e-03  4.158e-01  -0.008    0.993
+SiteTypeGravelPit:Date:Latitude          NA         NA      NA       NA
+SiteTypeLacustrine:Date:Latitude         NA         NA      NA       NA
+SiteTypeMarine:Date:Latitude      3.039e-03  4.731e-01   0.006    0.995
+SiteTypeMine:Date:Latitude               NA         NA      NA       NA
+SiteTypePitfall:Date:Latitude            NA         NA      NA       NA
+SiteTypeRiverine:Date:Latitude    3.492e-03  4.158e-01   0.008    0.993
+SiteTypeSwamp:Date:Latitude              NA         NA      NA       NA
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 142.43  on 121  degrees of freedom
+Residual deviance: 109.17  on 101  degrees of freedom
+  (68 observations deleted due to missingness)
+AIC: 151.17
+
+Number of Fisher Scoring iterations: 19

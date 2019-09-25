@@ -1,0 +1,52 @@
+100 permutations, 100 simulated datasets.
+
+test & type1 & power \\
+Cram\'{e}r test & 5 & 9 \\
+Cram\'{e}r-von Mises (lat) & 4 & 6 \\
+Cram\'{e}r-von Mises (lon) & 6 & 10 \\
+Energy distance (d_{E}) & 5 & 9 \\
+Energy distance (d_{gc}) & 5 & 14 \\
+Kolmogorov-Smirnov (lat) & 2 & 8 \\
+Kolmogorov-Smirnov (lon) & 3 & 14 \\
+kernel test (k_G,d_{E}) & 4 & 57 \\
+kernel test (k_G,d_{gc}) & 4 & 86 \\
+kernel test (k_L,d_{E}) & 4 & 59 \\
+kernel test (k_L,d_{gc}) & 4 & 88 \\
+
+
+1000 permutations, 100 simulated datasets.
+
+test & type1 & power \\
+Cram\'{e}r test & 3 & 8 \\
+Cram\'{e}r-von Mises (lat) & 4 & 6 \\
+Cram\'{e}r-von Mises (lon) & 8 & 6 \\
+Energy distance (d_{E}) & 3 & 6 \\
+Energy distance (d_{gc}) & 3 & 16 \\
+Kolmogorov-Smirnov (lat) & 6 & 7 \\
+Kolmogorov-Smirnov (lon) & 7 & 13 \\
+kernel test (k_G,d_{E}) & 6 & 65 \\
+kernel test (k_G,d_{gc}) & 3 & 96 \\
+kernel test (k_L,d_{E}) & 5 & 68 \\
+kernel test (k_L,d_{gc}) & 3 & 96 \\
+
+
+1000 permutations, 1000 simulated datasets.
+
+test & type1 & power \\
+Cram\'{e}r test & 0.05 & 0.061 \\
+Cram\'{e}r-von Mises (lat) & 0.042 & 0.056 \\
+Cram\'{e}r-von Mises (lon) & 0.06 & 0.071 \\
+Energy distance (d_{E}) & 0.049 & 0.058 \\
+Energy distance (d_{gc}) & 0.045 & 0.112 \\
+Kolmogorov-Smirnov (lat) & 0.04 & 0.063 \\
+Kolmogorov-Smirnov (lon) & 0.059 & 0.109 \\
+kernel test (k_G,d_{E}) & 0.038 & 0.661 \\
+kernel test (k_G,d_{gc}) & 0.034 & 0.956 \\
+kernel test (k_L,d_{E}) & 0.038 & 0.678 \\
+kernel test (k_L,d_{gc}) & 0.035 & 0.947 \\
+
+kernel test ($k_G,d_{E},\sigma=median$) & 0.043 & 0.135 \\
+kernel test ($k_G,d_{gc},\sigma=median$) & 0.043 & 0.17 \\
+kernel test ($k_L,d_{E},\sigma=median$) & 0.044 & 0.186 \\
+kernel test ($k_L,d_{gc},\sigma=median$) & 0.042 & 0.335 \\
+

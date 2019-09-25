@@ -1,0 +1,70 @@
+> summary(glmNoSamplerEndoClonal)
+
+Call:
+glm(formula = sex ~ SiteType + Date + Latitude + SampleCategory, 
+    family = binomial, data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-2.0655  -0.6810   0.6158   0.7963   1.7288  
+
+Coefficients:
+                         Estimate Std. Error z value Pr(>|z|)   
+(Intercept)             6.220e+00  4.710e+00   1.321  0.18664   
+SiteTypeGravelPit       1.771e+01  3.956e+03   0.004  0.99643   
+SiteTypeLacustrine      1.951e+01  2.403e+03   0.008  0.99352   
+SiteTypeMarine          4.020e+00  1.925e+00   2.089  0.03674 * 
+SiteTypeMine            1.948e+01  3.956e+03   0.005  0.99607   
+SiteTypePitfall        -1.883e+01  2.797e+03  -0.007  0.99463   
+SiteTypeRiverine        3.069e+00  1.179e+00   2.603  0.00924 **
+SiteTypeSwamp           1.840e+01  2.171e+03   0.008  0.99324   
+Date                   -2.922e-05  1.733e-05  -1.686  0.09180 . 
+Latitude               -1.041e-01  7.139e-02  -1.458  0.14474   
+SampleCategoryCrania   -1.395e+00  1.362e+00  -1.024  0.30578   
+SampleCategoryLongbone -1.851e-01  9.267e-01  -0.200  0.84169   
+SampleCategoryPetrosal -2.642e-01  1.147e+00  -0.230  0.81780   
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 123.11  on 103  degrees of freedom
+Residual deviance: 103.26  on  91  degrees of freedom
+  (86 observations deleted due to missingness)
+AIC: 129.26
+
+Number of Fisher Scoring iterations: 16
+
+> summary(glmNoSamplerLatEndoClonal)
+
+Call:
+glm(formula = sex ~ SiteType + Date + SampleCategory, family = binomial, 
+    data = SexBias)
+
+Deviance Residuals: 
+    Min       1Q   Median       3Q      Max  
+-1.9287  -0.8263   0.6415   0.7625   1.5917  
+
+Coefficients:
+                         Estimate Std. Error z value Pr(>|z|)  
+(Intercept)            -4.146e-01  1.274e+00  -0.325   0.7448  
+SiteTypeGravelPit       1.819e+01  3.956e+03   0.005   0.9963  
+SiteTypeLacustrine      1.888e+01  2.672e+03   0.007   0.9944  
+SiteTypeMarine          2.566e+00  1.556e+00   1.649   0.0991 .
+SiteTypeMine            1.878e+01  3.956e+03   0.005   0.9962  
+SiteTypePitfall        -1.720e+01  2.797e+03  -0.006   0.9951  
+SiteTypeRiverine        2.360e+00  9.945e-01   2.373   0.0176 *
+SiteTypeSwamp           1.916e+01  2.284e+03   0.008   0.9933  
+Date                   -2.699e-05  1.701e-05  -1.587   0.1126  
+SampleCategoryCrania   -1.119e+00  1.345e+00  -0.832   0.4054  
+SampleCategoryLongbone  1.403e-01  8.925e-01   0.157   0.8751  
+SampleCategoryPetrosal  3.061e-01  1.070e+00   0.286   0.7748  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+(Dispersion parameter for binomial family taken to be 1)
+
+    Null deviance: 123.11  on 103  degrees of freedom
+Residual deviance: 105.47  on  92  degrees of freedom
+  (86 observations deleted due to missingness)
+AIC: 129.47
