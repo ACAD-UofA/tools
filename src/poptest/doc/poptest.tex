@@ -1,0 +1,99 @@
+\documentclass[aspectratio=1610]{beamer}
+\usepackage[authoryear]{natbib}
+\usepackage{graphics}
+\usetheme{Warsaw}
+
+\begin{document}
+
+\section{$F_{st}$}
+
+\begin{frame}
+\frametitle{Weir \& Cockerham (1984) $F_{st}$}
+\begin{itemize}
+\item Is there greater variance between population groups than within?
+\item Power of $F_{st}$ increases when accumulated across multiple loci.
+\item Sparse SNP targets makes this problematic.
+\item We can estimate uncertainty with jackknife.
+\item For each group, $j\in(1..k)$, drop individual $j_i$ from the samples.
+	For each remaining group, $m\in(1..k), m!=j$, iteratively drop a second
+	individual from the samples.
+	Continue for all $i$ in group $j$.
+\end{itemize}
+\end{frame}
+
+\section{Multiple population test}
+
+\begin{frame}
+\frametitle{Null Hypothesis}
+
+\begin{itemize}
+\item $H_0$: The population groups are indistinguishable subgroups of a
+	single homogeneous population.
+\item Consider a single locus.
+\item The minor allele frequency for the homogeneous population, $MAF_T$,
+	is estimated to be the sum of the minor allele counts for all individuals, $i$,
+	divided by the number of alleles counted, $N$.
+\begin{equation}
+	MAF_T = \frac{1}{2N} \sum_{i} MAC_i
+\end{equation}
+\item Thus, under the null hypothesis, the probability of drawing a
+	minor allele from the population is $MAF_T$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Likelihood Ratio}
+\begin{itemize}
+\item For population $j$, the likelihood, $L$, of observing $MAC_j$
+	minor alleles when sampling $TAC_j$ total alleles, is
+\begin{equation}
+	L(MAC_j) = Bin(MAC_j, TAC_j, MAF_T)
+\end{equation}
+
+Where $Bin(\cdot,\cdot,\cdot)$ is the Binomial probability mass function.
+
+\item Now, any one observation may be unlikely,
+	particularly for a large total allele count.
+	So we scale by the likelihood of the expected minor allele count.
+
+\begin{equation}
+	\frac{L(MAC_j)}{L(E(MAC_j))} = \frac{Bin(MAC_j, TAC_j, MAF_T)}{Bin(E(MAC_j), TAC_j, MAF_T)}
+\end{equation}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Joint Likelihood Ratio}
+\begin{itemize}
+
+\item The joint likelihood ratio for $k$ population groups
+	is the product of the likelihood ratios for all the groups.
+
+\begin{equation}
+	L = \prod_{j=1}^{k} \frac{L(MAC_j)}{L(E(MAC_j))}
+\end{equation}
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+	\frametitle{$E(MAC_j)$}
+\begin{itemize}
+\item The expected value of the minor allele count, $E(MAC_j)$,
+	is an integer close to $MAF_T\times{}TAC_j$
+	(we may only observe an integral number of minor alleles).
+\item Computationally, we take calculate $L(E(MAC_j))$ as the larger of
+	$L(\left\lfloor{MAF_T\times{}TAC_j}\right\rfloor)$ and
+	$L(\left\lceil{MAF_T\times{}TAC_j}\right\rceil)$.
+	(where $\lfloor{}x\rfloor$ denotes the largest integer not greater than x,
+	and $\lceil{}x\rceil$ denotes the smallest integer not less than x)
+
+\end{itemize}
+
+\end{frame}
+
+%\bibliographystyle{plainnat}
+%\bibliography{refs}{}
+
+\end{document}

@@ -1,0 +1,29 @@
+
+# annotate chr1 of 1000genomes phase3 data with snpEff
+$ time java -jar /localscratch/Programs/snpEff/snpEff.jar \
+	GRCh37.75 \
+	ALL.chr1.phase3_shapeit2_mvncall_integrated.20130502.genotype.vcf.gz \
+	> /localscratch/grg/tmp/ALL.chr1.phase3_shapeit2_mvncall_integrated.20130502.genotype.snpeff_annotated.vcf
+
+real    128m33.419s
+user    149m56.966s
+sys     4m8.652s
+
+# accumulate snpEff impact for all pairwise distances in 1000genomes chr1
+$ time ./dist.sh \
+	/localscratch/grg/tmp/ALL.chr1.phase3_shapeit2_mvncall_integrated.20130502.genotype.snpeff_annotated.vcf
+\
+	> ALL.chr1.phase3_shapeit2_mvncall_integrated.20130502.genotype.snpeff_annotated.tsv
+
+###  took 2 days
+
+$ time ./plot_dist.py ALL.chr1.phase3_shapeit2_mvncall_integrated.20130502.genotype.snpeff_annotated.tsv impact_vs_dist_chr1.pdf
+
+
+# accumulate CADD scores for all pairwise distances in 1000genomes chr1
+[a1158147@acad2 nrc]$ time ./dist /localscratch/Refs/1000genomes/phase3/ALL.chr1.phase3_shapeit2_mvncall_integrated.20130502.genotype.vcf.gz /localscratch/grg/data/CADD/1000G_phase3_inclAnno.tsv.gz  > c.tsv
+Warning: The index file is older than the data file: /localscratch/grg/data/CADD/1000G_phase3_inclAnno.tsv.gz.tbi
+
+real    6278m41.678s
+user    6275m12.058s
+sys     1m54.040s

@@ -1,0 +1,15 @@
+1	2	?ABB	AABB1	BABB1	AABB2	BABB2	AABB1 & AABB2	AABB1 & BABB2	AABB2 & BABB1	BABB1 & BABB2	p
+(AncientWisent, Steppe, Aurochs, Bubalus_bubalis)	(CladeX, Steppe, Aurochs, Bubalus_bubalis)	161	111	50	133	28	108	3	25	25	1.7200825650204364e-12
+(AncientWisent, Steppe, Aurochs, Bubalus_bubalis)	(HistoricalWisent, Steppe, Aurochs, Bubalus_bubalis)	174	115	59	119	55	108	7	11	48	1.3703943928622317e-24
+(AncientWisent, Steppe, Aurochs, Bubalus_bubalis)	(ModernWisent, Steppe, Aurochs, Bubalus_bubalis)	178	124	54	108	70	95	29	13	41	5.1228532940879327e-11
+(CladeX, Steppe, Aurochs, Bubalus_bubalis)	(HistoricalWisent, Steppe, Aurochs, Bubalus_bubalis)	529	448	81	385	144	370	78	15	66	3.0918016213586894e-29
+(CladeX, Steppe, Aurochs, Bubalus_bubalis)	(ModernWisent, Steppe, Aurochs, Bubalus_bubalis)	556	469	87	350	206	326	143	24	63	2.7875687279399017e-13
+(HistoricalWisent, Steppe, Aurochs, Bubalus_bubalis)	(ModernWisent, Steppe, Aurochs, Bubalus_bubalis)	618	436	182	372	246	342	94	30	152	5.5048582680848621e-48
+(AncientWisent, Aurochs, Steppe, Bubalus_bubalis)	(CladeX, Aurochs, Steppe, Bubalus_bubalis)	758	20	738	9	749	4	16	5	733	4.106139565071177e-05
+(AncientWisent, Aurochs, Steppe, Bubalus_bubalis)	(HistoricalWisent, Aurochs, Steppe, Bubalus_bubalis)	822	22	800	11	811	8	14	3	797	1.0083599082368854e-11
+(AncientWisent, Aurochs, Steppe, Bubalus_bubalis)	(ModernWisent, Aurochs, Steppe, Bubalus_bubalis)	826	25	801	22	804	12	13	10	791	1.4904783862857104e-14
+(CladeX, Aurochs, Steppe, Bubalus_bubalis)	(HistoricalWisent, Aurochs, Steppe, Bubalus_bubalis)	2517	36	2481	47	2470	16	20	31	2450	7.3417570716645816e-20
+(CladeX, Aurochs, Steppe, Bubalus_bubalis)	(ModernWisent, Aurochs, Steppe, Bubalus_bubalis)	2580	39	2541	73	2507	15	24	58	2483	1.990113275681706e-14
+(HistoricalWisent, Aurochs, Steppe, Bubalus_bubalis)	(ModernWisent, Aurochs, Steppe, Bubalus_bubalis)	2845	58	2787	83	2762	39	19	44	2743	2.6600885262073503e-50
+(Wisent, Steppe, Aurochs, Bubalus_bubalis)	(CladeX, Steppe, Aurochs, Bubalus_bubalis)	557	357	200	468	89	332	25	136	64	4.1847195777255076e-14
+(Wisent, Aurochs, Steppe, Bubalus_bubalis)	(CladeX, Aurochs, Steppe, Bubalus_bubalis)	2634	93	2541	41	2593	15	78	26	2515	1.5809163034678372e-12
